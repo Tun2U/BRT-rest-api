@@ -1,5 +1,7 @@
 <?php
 
+namespace Tun2U\Brt\JsonSchema;
+
 class CreateData
 {
     /**

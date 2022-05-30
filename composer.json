@@ -1,0 +1,21 @@
+{
+  "name": "tun2u/brt-rest-api",
+  "description": "PHP implementation of Brt Shipment Rest Api",
+  "type": "library",
+  "version": "1.0.0",
+  "license": "proprietary",
+  "require": {
+    "php": ">=7.3.0"
+  },
+  "authors": [
+    {
+      "name": "Tun2U",
+      "email": "info@tun2u.com",
+      "homepage": "https://www.tun2u.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {"Tun2U\\Brt\\": "src/"}
+  }
+}
