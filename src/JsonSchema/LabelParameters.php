@@ -35,6 +35,16 @@ class LabelParameters
     private $isBarcodeControlRowRequired;
 
 
+    public function __construct()
+    {
+        // set defaults values
+        $this->offsetX = 0;
+        $this->offsetY = 0;
+        $this->isBorderRequired = 0;
+        $this->isLogoRequired = 0;
+        $this->isBarcodeControlRowRequired = 0;
+    }
+
 
 
     /**
@@ -136,9 +146,9 @@ class LabelParameters
 
 
     /**
-     * @return string
+     * @return array
      */
-    public function toJsonPayload() : string
+    public function toArrayPayload() : array
     {
         $payload['outputType'] = $this->outputType;
         $payload['offsetX'] = $this->offsetX;
@@ -147,7 +157,7 @@ class LabelParameters
         $payload['isLogoRequired'] = $this->isLogoRequired;
         $payload['isBarcodeControlRowRequired'] = $this->isBarcodeControlRowRequired;
 
-        return json_encode($payload);
+        return $payload;
     }
 
 }

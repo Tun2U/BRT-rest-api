@@ -90,6 +90,11 @@ class CreateData
     private $numericSenderReference;
 
 
+    public function __construct()
+    {
+        // set defaults values
+        $this->network = '';
+    }
 
 
     /**
@@ -367,9 +372,9 @@ class CreateData
 
 
     /**
-     * @return string
+     * @return array
      */
-    public function toJsonPayload() : string
+    public function toArrayPayload() : array
     {
         $payload['network'] = $this->network;
         $payload['departureDepot'] = $this->departureDepot;
@@ -389,7 +394,7 @@ class CreateData
         $payload['weightKG'] = $this->weightKG;
         $payload['numericSenderReference'] = $this->numericSenderReference;
 
-        return json_encode($payload);
+        return $payload;
     }
 
 }

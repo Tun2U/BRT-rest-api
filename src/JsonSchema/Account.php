@@ -61,13 +61,13 @@ class Account
 
 
     /**
-     * @return string
+     * @return array
      */
-    public function toJsonPayload() : string
+    public function toArrayPayload() : array
     {
         $payload['userID'] = $this->userID;
         $payload['password'] = $this->password;
-        return json_encode($payload);
+        return $payload;
     }
 
 
