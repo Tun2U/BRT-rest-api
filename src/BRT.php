@@ -5,6 +5,7 @@ namespace Tun2U\Brt;
 use GuzzleHttp\Client;
 use Tun2U\Brt\Exception\InvalidJsonException;
 use Tun2U\Brt\JsonSchema\Account;
+use Tun2U\Brt\JsonSchema\ConfirmData;
 use Tun2U\Brt\JsonSchema\CreateData;
 use Tun2U\Brt\JsonSchema\LabelParameters;
 
@@ -22,7 +23,7 @@ class BRT
 
 
     public function shipmentCreate(CreateData $createData, $isLabelRequired = 1, LabelParameters $labelParameters = null) {
-        $endpoint = self::SHIPMENT_BASE_URL . 'shipment';
+        $endpoint = 'shipment';
 
         // creare il payload json
         $json['account'] = $this->account->toArrayPayload();
@@ -36,6 +37,18 @@ class BRT
 
         // inviare la chiamata POST
         $response = $this->call('POST', $endpoint, $payload);
+    }
+
+    public function shipmentConfirm(ConfirmData $confirmData) {
+        $endpoint = 'shipment';
+
+        // creare il payload json
+        $json['account'] = $this->account->toArrayPayload();
+        $json['confirmData'] = $confirmData->toArrayPayload();
+        $payload = json_encode($json);
+
+        // inviare la chiamata PUT
+        $response = $this->call('PUT', $endpoint, $payload);
     }
 
 
