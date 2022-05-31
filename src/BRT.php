@@ -2,7 +2,8 @@
 
 namespace Tun2U\Brt;
 
-use http\Client;
+use GuzzleHttp\Client;
+use Tun2U\Brt\Exception\InvalidJsonException;
 use Tun2U\Brt\JsonSchema\Account;
 use Tun2U\Brt\JsonSchema\CreateData;
 use Tun2U\Brt\JsonSchema\LabelParameters;
@@ -33,12 +34,9 @@ class BRT
         $payload = json_encode($json);
 
 
-        // TODO inviare la chiamata POST
-        $this->call('POST', $endpoint);
+        // inviare la chiamata POST
+        $response = $this->call('POST', $endpoint, $payload);
     }
-
-
-
 
 
     /**
@@ -47,15 +45,15 @@ class BRT
      * @throws GuzzleException
      * @throws InvalidJsonException|RequestException
      */
-    private function call($method, $endpoint)
+    private function call($method, $endpoint, $payload)
     {
         $client = new Client([
             'base_url' => self::SHIPMENT_BASE_URL,
-            'timeout' => 2.0
+            'timeout' => 5.0
         ]);
 
         $request = $client->createRequest($method, $endpoint, [
-            'json' => $this->createRequestBody()
+            'json' => $payload
         ]);
 
         $response = $client->send($request);
