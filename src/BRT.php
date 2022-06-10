@@ -32,11 +32,9 @@ class BRT
         if ($isLabelRequired && !empty($labelParameters)) {
             $json['labelParameters'] = $labelParameters;
         }
-        $payload = json_encode($json);
-
 
         // inviare la chiamata POST
-        $response = $this->call('POST', $endpoint, $payload);
+        return $this->call('POST', $endpoint, $json);
     }
 
     public function shipmentConfirm(ConfirmData $confirmData) {
@@ -45,10 +43,9 @@ class BRT
         // creare il payload json
         $json['account'] = $this->account->toArrayPayload();
         $json['confirmData'] = $confirmData->toArrayPayload();
-        $payload = json_encode($json);
 
         // inviare la chiamata PUT
-        $response = $this->call('PUT', $endpoint, $payload);
+        return $this->call('PUT', $endpoint, $json);
     }
 
 
@@ -62,7 +59,7 @@ class BRT
     {
         $client = new Client([
             'base_url' => self::SHIPMENT_BASE_URL,
-            'timeout' => 5.0
+            'timeout' => 10.0
         ]);
 
         $request = $client->createRequest($method, $endpoint, [

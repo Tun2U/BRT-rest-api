@@ -85,6 +85,11 @@ class CreateData
     private $weightKG;
 
     /**
+     * @var string
+     */
+    private $isCODMandatory;
+
+    /**
      * @var int
      */
     private $numericSenderReference;
@@ -94,6 +99,7 @@ class CreateData
     {
         // set defaults values
         $this->network = '';
+        $this->isCODMandatory = "0";
     }
 
 
@@ -354,6 +360,22 @@ class CreateData
     }
 
     /**
+     * @return string
+     */
+    public function getIsCODMandatory(): string
+    {
+        return $this->isCODMandatory;
+    }
+
+    /**
+     * @param string $isCODMandatory
+     */
+    public function setIsCODMandatory(string $isCODMandatory): void
+    {
+        $this->isCODMandatory = $isCODMandatory;
+    }
+
+    /**
      * @return int
      */
     public function getNumericSenderReference(): int
@@ -368,7 +390,6 @@ class CreateData
     {
         $this->numericSenderReference = $numericSenderReference;
     }
-
 
 
     /**
@@ -392,6 +413,7 @@ class CreateData
         $payload['isAlertRequired'] = $this->isAlertRequired;
         $payload['numberOfParcels'] = $this->numberOfParcels;
         $payload['weightKG'] = $this->weightKG;
+        $payload['isCODMandatory'] = $this->isCODMandatory;
         $payload['numericSenderReference'] = $this->numericSenderReference;
 
         return $payload;
