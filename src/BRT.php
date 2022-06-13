@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use Tun2U\Brt\Exception\InvalidJsonException;
 use Tun2U\Brt\JsonSchema\Account;
 use Tun2U\Brt\JsonSchema\ConfirmData;
+use Tun2U\Brt\JsonSchema\ConfirmResponse;
 use Tun2U\Brt\JsonSchema\CreateData;
 use Tun2U\Brt\JsonSchema\CreateResponse;
 use Tun2U\Brt\JsonSchema\LabelParameters;
@@ -36,6 +37,7 @@ class BRT
 
         // inviare la chiamata POST
         $response = $this->call('POST', $endpoint, $json);
+        return $this->parseResponse($response);
     }
 
     public function shipmentConfirm(ConfirmData $confirmData) {
@@ -46,7 +48,8 @@ class BRT
         $json['confirmData'] = $confirmData->toArrayPayload();
 
         // inviare la chiamata PUT
-        return $this->call('PUT', $endpoint, $json);
+        $response = $this->call('PUT', $endpoint, $json);
+        return $this->parseResponse($response);
     }
 
 
@@ -80,14 +83,15 @@ class BRT
 
 
     private function parseResponse($response) {
+        $parsedResponse = null;
         if (!empty($response)) {
             if(property_exists($response, "createResponse")) {
                 $parsedResponse = new CreateResponse($response->createResponse);
-                return $parsedResponse;
-            } else {
-                return null; // TODO gestire la risposta della conferma spedizione
+            } elseif(property_exists($response, "confirmResponse")) {
+                $parsedResponse = new ConfirmResponse($response->confirmResponse);
             }
-        } else return null;
+        }
+        return $parsedResponse;
     }
 
 }
