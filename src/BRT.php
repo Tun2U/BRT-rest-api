@@ -7,6 +7,7 @@ use Tun2U\Brt\Exception\InvalidJsonException;
 use Tun2U\Brt\JsonSchema\Account;
 use Tun2U\Brt\JsonSchema\ConfirmData;
 use Tun2U\Brt\JsonSchema\CreateData;
+use Tun2U\Brt\JsonSchema\CreateResponse;
 use Tun2U\Brt\JsonSchema\LabelParameters;
 
 
@@ -34,7 +35,7 @@ class BRT
         }
 
         // inviare la chiamata POST
-        return $this->call('POST', $endpoint, $json);
+        $response = $this->call('POST', $endpoint, $json);
     }
 
     public function shipmentConfirm(ConfirmData $confirmData) {
@@ -75,6 +76,18 @@ class BRT
         }
 
         return $response;
+    }
+
+
+    private function parseResponse($response) {
+        if (!empty($response)) {
+            if(property_exists($response, "createResponse")) {
+                $parsedResponse = new CreateResponse($response->createResponse);
+                return $parsedResponse;
+            } else {
+                return null; // TODO gestire la risposta della conferma spedizione
+            }
+        } else return null;
     }
 
 }
