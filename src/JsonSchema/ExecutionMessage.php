@@ -32,13 +32,13 @@ class ExecutionMessage
             $this->code = $jsonObject->code;
         }
         if(property_exists($jsonObject, "severity")) {
-            $this->severity = new ExecutionMessage($jsonObject->severity);
+            $this->severity = $jsonObject->severity;
         }
         if(property_exists($jsonObject, "codeDesc")) {
-            $this->codeDesc = new ExecutionMessage($jsonObject->codeDesc);
+            $this->codeDesc = $jsonObject->codeDesc;
         }
         if(property_exists($jsonObject, "message")) {
-            $this->message = new ExecutionMessage($jsonObject->message);
+            $this->message = $jsonObject->message;
         }
     }
 
