@@ -15,11 +15,11 @@ class Labels
     public function __construct($labelsArray = array())
     {
         foreach($labelsArray as $item) {
-            if (!empty($item)) {
+            if (!empty($item) && is_array($item) && !empty($item[0])) {
                 $label = new Label();
-                $label->setDataLength($item->dataLength);
-                $label->setParcelID($item->parcelId);
-                $label->setStream($item->stream);
+                $label->setDataLength($item[0]->dataLength);
+                $label->setParcelID($item[0]->parcelID);
+                $label->setStream($item[0]->stream);
                 $this->labels[] = $label;
             }
         }
