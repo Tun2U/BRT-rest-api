@@ -27,9 +27,9 @@ class Labels
 
 
     /**
-     * @return Label
+     * @return array
      */
-    public function getLabels(): Label
+    public function getLabels(): array
     {
         return $this->labels;
     }
