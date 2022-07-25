@@ -9,6 +9,7 @@ use Tun2U\Brt\JsonSchema\ConfirmData;
 use Tun2U\Brt\JsonSchema\ConfirmResponse;
 use Tun2U\Brt\JsonSchema\CreateData;
 use Tun2U\Brt\JsonSchema\CreateResponse;
+use Tun2U\Brt\JsonSchema\DeleteData;
 use Tun2U\Brt\JsonSchema\LabelParameters;
 
 
@@ -46,6 +47,18 @@ class BRT
         // creare il payload json
         $json['account'] = $this->account->toArrayPayload();
         $json['confirmData'] = $confirmData->toArrayPayload();
+
+        // inviare la chiamata PUT
+        $response = $this->call('PUT', $endpoint, $json);
+        return $this->parseResponse($response);
+    }
+
+    public function shipmentDelete(DeleteData $deleteData) {
+        $endpoint = 'delete';
+
+        // creare il payload json
+        $json['account'] = $this->account->toArrayPayload();
+        $json['deleteData'] = $deleteData->toArrayPayload();
 
         // inviare la chiamata PUT
         $response = $this->call('PUT', $endpoint, $json);
