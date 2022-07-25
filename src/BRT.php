@@ -10,6 +10,7 @@ use Tun2U\Brt\JsonSchema\ConfirmResponse;
 use Tun2U\Brt\JsonSchema\CreateData;
 use Tun2U\Brt\JsonSchema\CreateResponse;
 use Tun2U\Brt\JsonSchema\DeleteData;
+use Tun2U\Brt\JsonSchema\DeleteResponse;
 use Tun2U\Brt\JsonSchema\LabelParameters;
 
 
@@ -102,6 +103,8 @@ class BRT
                 $parsedResponse = new CreateResponse($response->createResponse);
             } elseif(property_exists($response, "confirmResponse")) {
                 $parsedResponse = new ConfirmResponse($response->confirmResponse);
+            } elseif(property_exists($response, "deleteResponse")) {
+                $parsedResponse = new DeleteResponse($response->deleteResponse);
             }
         }
         return $parsedResponse;
