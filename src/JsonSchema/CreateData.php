@@ -57,6 +57,11 @@ class CreateData
     /**
      * @var string
      */
+    private $consigneeContactName;
+
+    /**
+     * @var string
+     */
     private $consigneeTelephone;
 
     /**
@@ -266,6 +271,22 @@ class CreateData
     /**
      * @return string
      */
+    public function getConsigneeContactName(): string
+    {
+        return $this->consigneeContactName;
+    }
+
+    /**
+     * @param string $consigneeContactName
+     */
+    public function setConsigneeContactName(string $consigneeContactName): void
+    {
+        $this->consigneeContactName = $consigneeContactName;
+    }
+
+    /**
+     * @return string
+     */
     public function getConsigneeTelephone(): string
     {
         return $this->consigneeTelephone;
@@ -407,6 +428,7 @@ class CreateData
         $payload['consigneeCity'] = $this->consigneeCity;
         $payload['consigneeProvinceAbbreviation'] = $this->consigneeProvinceAbbreviation;
         $payload['consigneeCountryAbbreviationISOAlpha2'] = $this->consigneeCountryAbbreviationISOAlpha2;
+        $payload['consigneeContactName'] = $this->consigneeContactName;
         $payload['consigneeTelephone'] = $this->consigneeTelephone;
         $payload['consigneeEMail'] = $this->consigneeEMail;
         $payload['consigneeMobilePhoneNumber'] = $this->consigneeMobilePhoneNumber;
