@@ -99,6 +99,11 @@ class CreateData
      */
     private $numericSenderReference;
 
+    /**
+     * @var string
+     */
+    private $notes;
+
 
     public function __construct()
     {
@@ -411,6 +416,23 @@ class CreateData
     {
         $this->numericSenderReference = $numericSenderReference;
     }
+
+    /**
+     * @return string
+     */
+    public function getNotes(): string
+    {
+        return $this->notes;
+    }
+
+    /**
+     * @param string $notes
+     */
+    public function setNotes(string $notes): void
+    {
+        $this->notes = $notes;
+    }
+
 
 
     /**
